@@ -1,0 +1,124 @@
+<div class="container forms">
+  <div class="page_container" fxLayout="column">
+    <form [formGroup]="employee_detail">
+      <!-- First and lastname  -->
+      <div fxLayout.gt-sm="row" fxLayoutGap="5%" fxLayout.lt-md="column" fxLayoutGap.lt-md="0%">
+        <div fxFlex="50%" fxFlex.lt-md="100%" fxLayout="row" fxLayout.lt-md="column">
+          <mat-label fxFlex.gt-md="40%">First Name</mat-label>
+          <mat-form-field appearance="outline" fxFlex.gt-md="60%">
+            <input matInput placeholder="" formControlName="firstname">
+            <mat-error *ngIf="employee_detail?.get('firstname')?.hasError('required')">
+
+              This field is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="employee_detail?.get('firstname')?.hasError('pattern')">
+              Not Valid value
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%" fxFlex.lt-md="100%" fxLayout="row" fxLayout.lt-md="column">
+          <mat-label fxFlex.gt-md="40%">Last Name</mat-label>
+          <mat-form-field appearance="outline" fxFlex.gt-md="60%">
+            <input matInput placeholder="" value="" formControlName="lastname">
+            <mat-error *ngIf="employee_detail?.get('lastname')?.hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="employee_detail?.get('lastname')?.hasError('pattern')">
+              Not Valid
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- Email  -->
+      <div fxLayout.gt-sm="row" fxLayoutGap="5%" fxLayout.lt-md="column" fxLayoutGap.lt-md="0">
+        <div fxFlex="50%" fxFlex.lt-md="100%" fxLayout="row" fxLayout.lt-md="column">
+          <mat-label fxFlex.gt-md="40%"> Email</mat-label>
+          <mat-form-field appearance="outline" fxFlex.gt-md="60%">
+            <input matInput placeholder="" formControlName="email">
+            <mat-error *ngIf="employee_detail?.get('Email')?.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%" fxFlex.lt-md="100%" fxLayout="row" fxLayout.lt-md="column">
+          <mat-label fxFlex.gt-md="40%">Alternate Email</mat-label>
+          <mat-form-field appearance="outline" fxFlex.gt-md="60%">
+            <input matInput placeholder="" value="" formControlName="alternateEmail">
+            <mat-error *ngIf="employee_detail?.get('AlterEmail')?.hasError('required')">
+              Alternate Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- dob & doj  -->
+      <div fxLayout.gt-sm="row" fxLayoutGap="5%" fxLayout.lt-md="column" fxLayoutGap.lt-md="0">
+        <div fxFlex="50%" fxFlex.lt-md="100%" fxLayout="row" fxLayout.lt-md="column">
+          <mat-label fxFlex.gt-md="40%">Dob</mat-label>
+          <mat-form-field appearance="outline" fxFlex.gt-md="60%">
+            <input matInput [matDatepicker]="picker" formControlName="created">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error
+              *ngIf="employee_detail?.get('Dob')?.hasError('required')&& !employee_detail?.get('Dob')?.hasError('matDatepickerParse')">
+              This field is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="employee_detail?.get('Dob')?.hasError('matDatepickerParse')">
+              Invalid Date
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%" fxFlex.lt-md="100%" fxLayout="row" fxLayout.lt-md="column">
+          <mat-label fxFlex.gt-md="40%">Doj</mat-label>
+          <mat-form-field appearance="outline" fxFlex.gt-md="60%">
+            <input matInput [matDatepicker]="datepicker" formControlName="modified">
+            <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker></mat-datepicker>
+            <mat-error
+              *ngIf="employee_detail?.get('Doj')?.hasError('required')&& !employee_detail?.get('Doj')?.hasError('matDatepickerParse')">
+              This field is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="employee_detail?.get('Doj')?.hasError('matDatepickerParse')">
+              Invalid Date
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- designation and role  -->
+      <div fxLayout.gt-sm="row" fxLayoutGap="5%" fxLayout.lt-md="column" fxLayoutGap.lt-md="0">
+        <div fxFlex="50%" fxFlex.lt-md="100%" fxLayout="row" fxLayout.lt-md="column">
+          <mat-label fxFlex.gt-md="40%">Designation</mat-label>
+          <mat-form-field appearance="outline" fxFlex.gt-md="60%">
+            <mat-select value="Software developer" formControlName="designationId">
+              <mat-option *ngFor="let item of designation" [value]="item.id">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="employee_detail?.get('designation')?.hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div fxFlex="50%" fxFlex.lt-md="100%" fxLayout="row" fxLayout.lt-md="column">
+          <mat-label fxFlex.gt-md="40%">Role</mat-label>
+          <mat-form-field appearance="outline" fxFlex.gt-md="60%">
+            <mat-select formControlName="roleId">
+              <mat-option *ngFor="let item of role" [value]="item.id">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="employee_detail?.get('role')?.hasError('required')">
+              This field is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" (click)="onSubmit()">{{ update ? "update" : "submit"}}</button>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="end end">
+        <a color="primary" routerLink="/app/password" mat-stroked-button>Change Password</a>
+      </div>
+    </form>
+
+  </div>
+</div>

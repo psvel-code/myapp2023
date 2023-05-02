@@ -1,0 +1,8 @@
+<div fxLayoutAlign="space-between start">
+  <mat-icon mat-dialog-close="true" (click)="snackBarRef.dismissWithAction()">{{data.icon}}</mat-icon>
+  {{data.message}}
+  <span *ngIf=" data.name =='table_undo' " fxLayoutAlign="start center" (click)="snackBarRef.dismiss()">Undo</span>
+  <span *ngIf=" data.name !='table_undo' " fxLayoutAlign="start center"
+    (click)="snackBarRef.dismiss()"><mat-icon>close</mat-icon></span>
+
+</div>

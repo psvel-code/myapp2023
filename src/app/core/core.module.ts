@@ -10,6 +10,9 @@ import { DialogComponent } from './component/dialog/dialog.component';
 import { FormsComponent } from './component/forms/forms.component';
 import { SnackbarComponent } from './component/snackbar/snackbar.component';
 import { HomeComponent } from './component/home/home.component';
+import { TimePipeComponent } from './component/time-pipe/time-pipe.component';
+import { CommentsComponent } from './component/comments/comments.component';
+import { TimePipe } from './time.pipe';
 
 
 
@@ -23,7 +26,10 @@ import { HomeComponent } from './component/home/home.component';
     DialogComponent,
     FormsComponent,
     SnackbarComponent,
-    HomeComponent
+    HomeComponent,
+    TimePipeComponent,
+    CommentsComponent,
+    TimePipe
   ],
   imports: [
     CommonModule,

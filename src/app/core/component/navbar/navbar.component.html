@@ -11,7 +11,9 @@
         <a class="btn" routerLink="/nav/home" routerLinkActive="active_link" mat-button>Home</a>
         <a class="btn" routerLink="/nav/employee" routerLinkActive="active_link" mat-button>Employee</a>
         <a class="btn" routerLink="/nav/department" routerLinkActive="active_link" mat-button>Designation</a>
-        <a class="btn" routerLink="" mat-button> <mat-icon>logout</mat-icon></a>
+        <a class="btn" routerLink="/nav/comments" routerLinkActive="active_link" mat-button>FAQ</a>
+        <a class="btn" routerLink="/nav/time" routerLinkActive="active_link" mat-button>Time</a>
+        <a class="btn" routerLink="/login" mat-button> <mat-icon>logout</mat-icon></a>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -21,8 +23,11 @@
       <mat-nav-list>
         <a routerLink="/nav/home" routerLinkActive="active_link" mat-list-item>Home</a>
         <a routerLink="/nav/employee" routerLinkActive="active_link" mat-list-item>Employee</a>
-        <a routerLink="/nav/department" routerLinkActive="active_link" mat-list-item>Designation
-        </a>
+        <a routerLink="/nav/department" routerLinkActive="active_link" mat-list-item>Designation </a>
+        <a routerLink="/nav/comments" routerLinkActive="active_link" mat-list-item>Comments </a>
+        <a routerLink="/nav/time" routerLinkActive="active_link" mat-list-item>TimePipe </a>
+        <a routerLink="/login" routerLinkActive="active_link" mat-list-item> <mat-icon>logout</mat-icon></a>
+
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content><router-outlet></router-outlet></mat-sidenav-content>

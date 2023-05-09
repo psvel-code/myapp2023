@@ -12,7 +12,7 @@
       <mat-form-field class="example-full-width">
         <mat-label>Password</mat-label>
         <input type="password" matInput formControlName="password">
-        <mat-error *ngIf="Login_detail?.get('email')?.hasError('required')">
+        <mat-error *ngIf="Login_detail?.get('password')?.hasError('required')">
           This field is required
         </mat-error>
       </mat-form-field>

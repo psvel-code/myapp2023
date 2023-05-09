@@ -1,0 +1,52 @@
+<div class="body" fxLayout="column">
+  <!-- post -->
+  <h1>Comments({{len}})</h1>
+  <div fxLayout="row" fxLayoutGap="20px" class="comment">
+    <div class="icon" fxLayoutAlign="center center">c</div>
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Add a comment</mat-label>
+      <textarea matInput [(ngModel)]="comment"></textarea>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxFlexAlign="end">
+    <mat-icon>attachment</mat-icon>
+    <button class="submit" mat-button type="submit" (click)="AddPost()">submit</button>
+    <button class="cancel" mat-button type="reset">Cancel</button>
+  </div>
+
+  <!-- comments  -->
+  <div *ngFor="let post of posts; let i = index" class="post">
+    <div fxLayout="row" fxLayoutGap="20px" class="comment">
+      <div class="icon2" fxLayoutAlign="center center">c</div>
+      <div>
+        <div> <b>{{post.name}} </b> {{post.date| date:"medium"}} </div>
+        <div>{{post.comment}}</div>
+      </div>
+    </div>
+
+    <div class="reply" fxLayout="column" fxLayoutGap="20px" *ngFor="let reply of posts[i].reply">
+      <div fxLayout="row">
+        <div class="icon2" fxLayoutAlign="center center">c</div>
+        <div>
+          <div> <b>{{reply.name}} </b> {{reply.date| date:"medium"}} </div>
+          <div>{{reply.comment}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="reply">
+      <div (click)="isreplyFun(i)"><mat-icon>reply</mat-icon> reply</div>
+      <div *ngIf="posts[i].isreply" fxLayout="column" fxLayoutGap="20px">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Reply</mat-label>
+          <textarea matInput [(ngModel)]="reply_val"></textarea>
+        </mat-form-field>
+
+        <div fxLayout="row" fxFlexAlign="end">
+          <mat-icon>attachment</mat-icon>
+          <button class="submit" mat-button type="submit" (click)="AddReply(i)">submit</button>
+          <button class="cancel" mat-button type="reset" (click)="reset(i)">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

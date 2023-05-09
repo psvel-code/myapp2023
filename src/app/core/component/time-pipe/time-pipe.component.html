@@ -1,0 +1,17 @@
+<div class="body" fxLayoutAlign="center center" fxLayout="column">
+  <b class="tittle">Input</b>
+  <br>
+  <div >
+    <mat-form-field appearance="outline" class="example-full-width">
+      <mat-label>Enter the time</mat-label>
+      <input [(ngModel)]="time" matInput placeholder=" format 12:23:00" value="">
+    </mat-form-field>
+  </div>
+  <b class="tittle">Output</b>
+  <br>
+  <div class="output" fxLayoutAlign="center center">
+    {{time | time}}
+  </div>
+
+
+</div>

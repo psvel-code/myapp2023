@@ -10,7 +10,11 @@ export class RoutingService {
   app_url = environment.app_url;
 
   constructor(private http: HttpClient) { }
+  // message===================================
+  getMessages(url: string) {
+    return this.http.get('./assets/' + url);
 
+  }
   //backend call============================================================
   get(url: any) {
     return this.http.get(this.app_url + url);

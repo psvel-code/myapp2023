@@ -19,6 +19,7 @@ export class TableComponent {
   element!: any[];
   dataSource: any
   displayed_columns!: any[];
+  columns!: any[];
   date = new Date();
   loader = true;
   employee_detail!: FormGroup;
@@ -37,8 +38,10 @@ export class TableComponent {
       console.log("table");
       this.actions = this.data.actions
       this.element = this.data.datasource;
-      this.displayed_columns = this.data.displayedColumns;
-      console.log("this.data.datasource", this.data.datasource);
+      this.columns = this.data.Columns;
+      this.displayed_columns = this.columns.map(column => column.columnDef);
+      // console.log("this.displayed_columns", this.displayed_columns);
+      // console.log("this.data.datasource", this.data.datasource);
       this.dataSource = new MatTableDataSource(this.element);
       this.loader = false;
     }, 1000)

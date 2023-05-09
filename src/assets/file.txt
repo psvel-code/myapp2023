@@ -1,0 +1,187 @@
+
+
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'time'
+})
+export class TimePipe implements PipeTransform {
+  transform(value: string): string {
+    const parts = value.split(':').map((part) => parseInt(part, 10));
+    if (parts.length === 3) {
+      // format: hh:mm:ss
+      const hours = parts[0];
+      const minutes = parts[1];
+      const seconds = parts[2];
+      return `${hours}h ${minutes}m`;
+    } else if (parts.length === 4) {
+      // format: dd:hh:mm:ss
+      const days = parts[0];
+      const hours = parts[1];
+      const minutes = parts[2];
+      return `${days}d ${hours}h ${minutes}m`;
+    } else {
+      return value;
+    }
+  }
+}
+
+
+<p>{{ '02:45:00' | time }}</p>
+<p>{{ '1:14:45:00' | time }}</p>
+
+<p>{{ '02:45:00' | time: 'short' }}</p>
+
+This line of code is using the split() method to split the input string value by the : character. The resulting array of string parts is then mapped using the map() method to convert each string part to an integer using the parseInt() function with a radix of 10.
+
+So, for example, if the input value is "02:45:00", the split() method would produce the array ["02", "45", "00"], and the map() method would convert each element of the array to an integer, resulting in the array [2, 45, 0].
+
+
+
+
+
+
+
+<div class="body" fxLayout="column">
+  <!-- post -->
+  <div fxLayout="row" fxLayoutGap="20px" class="comment">
+    <div class="icon" fxLayoutAlign="center center">c</div>
+    <mat-form-field class="example-full-width">
+      <mat-label>Add a comment</mat-label>
+      <textarea matInput [(ngModel)]="comment"></textarea>
+    </mat-form-field>
+    <button class="submit" mat-button type="submit" (click)="addComment()">submit</button>
+    <button class="cancel" mat-button type="reset" (click)="resetComment()">Cancel</button>
+  </div>
+
+  <!-- comments  -->
+  <div *ngFor="let post of posts">
+    <div fxLayout="row" fxLayoutGap="20px" class="comment">
+      <div class="icon2" fxLayoutAlign="center center">c</div>
+      <div>
+        <div> <b>{{post.name}} </b> {{post.date | date:"short"}} </div>
+        <div>{{post.comment}}</div>
+      </div>
+    </div>
+
+    <!-- reply form -->
+    <div *ngIf="post.showReplyForm">
+      <div fxLayout="row" fxLayoutGap="20px" class="comment">
+        <div class="icon" fxLayoutAlign="center center">r</div>
+        <mat-form-field class="example-full-width">
+          <mat-label>Add a reply</mat-label>
+          <textarea matInput [(ngModel)]="post.reply"></textarea>
+        </mat-form-field>
+        <button class="submit" mat-button type="submit" (click)="addReply(post)">submit</button>
+        <button class="cancel" mat-button type="reset" (click)="resetReply(post)">Cancel</button>
+      </div>
+    </div>
+
+    <!-- replies -->
+    <div class="reply" fxLayout="row" fxLayoutGap="20px" *ngFor="let reply of post.replies">
+      <div class="icon2" fxLayoutAlign="center center">r</div>
+      <div>
+        <div> <b>{{reply.name}} </b> {{reply.date | date:"short"}} </div>
+        <div>{{reply.comment}}</div>
+      </div>
+    </div>
+
+    <!-- reply button -->
+    <div fxLayoutAlign="end">
+      <button mat-button (click)="toggleReplyForm(post)">
+        {{post.showReplyForm ? 'Cancel Reply' : 'Reply'}}
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-comments',
+  templateUrl: './comments.component.html',
+  styleUrls: ['./comments.component.scss']
+})
+export class CommentsComponent {
+  date = new Date();
+  name = 'Ashwini Prem';
+
+  // store all the comments and their replies
+  posts: any[] = [
+    { name: 'this.name', date: this.date, comment: 'visual studio latest version should be installed', replies: [], showReplyForm: false },
+  ];
+
+  // track the current comment and reply being typed
+  comment = '';
+
+
+///.//////
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-comments',
+  templateUrl: './comments.component.html',
+  styleUrls: ['./comments.component.scss']
+})
+export class CommentsComponent {
+  date = new Date();
+  comment!: string;
+  name = 'Ashwini Prem';
+  posts: any[] = [
+    { name: 'this.name', date: this.date, comment: 'visual studio latest version should be installed', replies: [] },
+  ];
+
+  AddPost() {
+    this.posts = [...this.posts, { name: this.name, date: this.date, comment: this.comment, replies: [] }];
+    this.comment = ''; // Clear the comment text area
+  }
+
+  AddReply(postIndex: number) {
+    const reply = { name: this.name, date: this.date, comment: this.comment };
+    this.posts[postIndex].replies.push(reply);
+    this.comment = ''; // Clear the comment text area
+  }
+}
+
+
+
+
+
+<!-- Display the comments -->
+<div *ngFor="let post of posts; let postIndex = index">
+  <div fxLayout="row" fxLayoutGap="20px" class="comment">
+    <div class="icon2" fxLayoutAlign="center center">c</div>
+    <div>
+      <div><b>{{ post.name }}</b> {{ post.date | date:"short" }}</div>
+      <div>{{ post.comment }}</div>
+    </div>
+  </div>
+  
+  <!-- Add a reply -->
+  <div fxLayout="row" fxLayoutGap="20px" class="reply">
+    <div class="icon" fxLayoutAlign="center center">r</div>
+    <mat-form-field class="example-full-width">
+      <mat-label>Reply</mat-label>
+      <textarea matInput [(ngModel)]="comment"></textarea>
+    </mat-form-field>
+    <button class="submit" mat-button type="submit" (click)="AddReply(postIndex)">Submit</button>
+  </div>
+  
+  <!-- Display the replies -->
+  <div *ngFor="let reply of post.replies">
+    <div fxLayout="row" fxLayoutGap="20px" class="comment reply">
+      <div class="icon2" fxLayoutAlign="center center">r</div>
+      <div>
+        <div><b>{{ reply.name }}</b> {{ reply.date | date:"short" }}</div>
+        <div>{{ reply.comment }}</div>
+      </div>
+    </div>
+  </div>
+</div>

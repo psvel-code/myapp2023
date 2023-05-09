@@ -40,6 +40,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
+
 const material = [
   CommonModule,
   MatButtonModule,
@@ -82,7 +83,7 @@ const material = [
   ReactiveFormsModule,
   FormsModule,
   RouterModule,
-  MatSortModule
+  MatSortModule,
 ]
 
 @NgModule({

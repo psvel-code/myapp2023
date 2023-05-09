@@ -12,9 +12,11 @@ export class EmployeeComponent {
   columns: any[] = [
     { columnDef: 'firstName', header: 'First Name', type: 'Text', sort: true },
     { columnDef: 'lastName', header: 'Last Name', type: 'Text', sort: true },
-    { columnDef: 'email', header: ' Total Used', type: 'Number', sort: true },
-    { columnDef: 'dateOfBirth', header: 'Date Of Birth', type: 'Number', sort: true }
+    { columnDef: 'email', header: ' Email', type: 'Number', sort: true },
+    { columnDef: 'dateOfBirth', header: 'Date Of Birth', type: 'Date', sort: true },
+    { columnDef: 'Action', header: 'Action', type: 'Number', sort: false }
   ];
+
   actions: any[] = [
     "description", "edit", "delete"
   ]
@@ -23,10 +25,10 @@ export class EmployeeComponent {
   constructor(private employee: EmployeeService) { }
   ngOnInit() {
     this.employee.getTableData().subscribe((res: any) => {
-  
+
       this.datasource = {
         datasource: res.response,
-        displayedColumns: this.displayedColumns,
+        Columns: this.columns,
         actions: this.actions
       }
     });
